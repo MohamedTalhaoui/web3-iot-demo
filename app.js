@@ -7,19 +7,19 @@ if (typeof web3 !== 'undefined') {
 SimpleInsuranceContract: null;
 $.getJSON("abi.json", function (abi) {
   SimpleInsuranceContract = web3.eth.contract(abi);
+  let SimpleInsurance = SimpleInsuranceContract.at('0x28f2e2c20b5b191e3088fa9623bc7b89461c98e0');
+
+  console.log(SimpleInsurance);
+  
+  SimpleInsurance.pool(function(error, result){
+    if(!error) {
+      console.log('Pool: ' + result  );
+    } else {
+      console.error(error);
+    }
+  });  
 });
 
-let SimpleInsurance = SimpleInsuranceContract.at('0x28f2e2c20b5b191e3088fa9623bc7b89461c98e0');
-
-console.log(SimpleInsurance);
-
-SimpleInsurance.pool(function(error, result){
-  if(!error) {
-    console.log('Pool: ' + result  );
-  } else {
-    console.error(error);
-  }
-});
 
 $("#button").click(function() {                   
   SimpleInsurance.subscribe({

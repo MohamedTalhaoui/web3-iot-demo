@@ -10,12 +10,32 @@
 	},
 	{
 		"constant": false,
-		"inputs": [],
+		"inputs": [
+			{
+				"name": "_index",
+				"type": "uint256"
+			}
+		],
 		"name": "payout",
 		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "subscribe",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
+		"type": "constructor"
 	},
 	{
 		"anonymous": false,
@@ -35,19 +55,23 @@
 		"type": "event"
 	},
 	{
-		"constant": false,
-		"inputs": [],
-		"name": "subscribe",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": true,

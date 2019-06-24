@@ -30,7 +30,7 @@ App = {
   initContracts: function () {
     $.getJSON("abi.json", function (abi) {
       let SimpleInsuranceContract = web3.eth.contract(abi);
-      App.SimpleInsurance = SimpleInsuranceContract.at('0xa7fea702b843dcabe24d2fadd4016b6b0dfd4fa0');
+      App.SimpleInsurance = SimpleInsuranceContract.at('0x2259671547053df742e00e7bccd87be2256b2e61');
        
       App.listenForEvents();
       return App.render();

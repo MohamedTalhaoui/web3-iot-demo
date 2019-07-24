@@ -1,10 +1,11 @@
 App = {
   web3Provider: null,
   SimpleInsurance: null,
-  premium : 0.5,
+  premium : 0.1,
   pool: null,
   account: '0x0',
   loading: false,
+  holders: new Map(),
 
   init: function () {
       console.log("App init ...")
@@ -30,8 +31,9 @@ App = {
   initContracts: function () {
     $.getJSON("abi.json", function (abi) {
       let SimpleInsuranceContract = web3.eth.contract(abi);
-      App.SimpleInsurance = SimpleInsuranceContract.at('0x2259671547053df742e00e7bccd87be2256b2e61');
-       
+      //App.SimpleInsurance = SimpleInsuranceContract.at('0x7b61ff44894a397589bd4d4f8be8f5cac0363217');
+      App.SimpleInsurance = SimpleInsuranceContract.at('0x23eb8e8c933f4a39838892497d852bf598d4c3f8');
+             
       App.listenForEvents();
       return App.render();
     })
@@ -51,13 +53,15 @@ App = {
 
       $('.premium').html(App.premium);
       
-      web3.eth.getCoinbase(function (err, account) {
-          if(err==null){
-              App.account = account;
-              $('#accountAddress').html("Your account: " + account);
-          }
-      })
-
+      App.account = web3.eth.accounts[0];
+      $('#accountAddress').html("Your account: " + App.account);
+      setInterval(function() {
+        if (web3.eth.accounts[0] !== App.account) {
+          App.account = web3.eth.accounts[0];
+          $('#accountAddress').html("Your account: " + App.account);
+        }
+      }, 100);
+      
       App.SimpleInsurance.pool(function(error, result){
         if(!error) {
           console.log('Pool: ' + result  );
@@ -68,6 +72,20 @@ App = {
         }
       });
 
+      var container = $('#holders');
+      $('#holders tbody').empty();
+      table = $('#holders tbody');
+      let holdersAddresses = App.holders.keys();
+      for (let address of holdersAddresses) { 
+        var tr = $('<tr>');
+        tr.append('<td>' + address + '</td>');
+        let holder = App.holders.get(address);
+        tr.append('<td>' + holder.name + '</td>');
+        tr.append('<td data-align="left">' + holder.value + '</td>');
+        table.append(tr);
+      }
+      container.append(table);
+
       console.log(App.SimpleInsurance);
 
       loader.hide();
@@ -76,9 +94,11 @@ App = {
   },
 
   subscribe: function () {
-    App.SimpleInsurance.subscribe({
+    var holderName = $('#holderName').val();
+
+    App.SimpleInsurance.subscribe(holderName, {
       from:web3.eth.accounts[0], 
-      value: 500000000000000000}, // 0.5 ETH
+      value: web3.toWei(App.premium, 'ether')},
       function(error, result){
         if(!error) {
             console.log('Subscribed from account: ' + web3.eth.accounts[0]);
@@ -91,10 +111,32 @@ App = {
   },
   
   listenForEvents: function () {
-    App.SimpleInsurance.PremiumReceived({}, {fromBlock: 0, toBlock: 'latest' }).watch(function (err, event) {
-      console.log('PremiumReceived event triggered');
-      App.render();
-    })
+    App.SimpleInsurance.HolderUpdate({}, {fromBlock: 0, toBlock: 'latest' }).watch(function (err, event) {
+      if(!err) {
+        console.log("Holder Update event received");
+        let holderInfo = event.args;
+        console.log(holderInfo);
+        let holder = {};
+        holderBalance =  web3.fromWei(holderInfo.balance, 'ether').toNumber();
+        if(holderBalance === 0) {
+          App.holders.delete(holderInfo.holder);
+        } else {
+          if(App.holders.has(holderInfo.holder)) {
+            holder = App.holders.get(holderInfo.holder);
+            holder.value += Number(holderBalance);
+          } else {
+            holder.name = holderInfo.name;
+            holder.amount = holderBalance;
+            holder.value = holderBalance;
+          }
+          App.holders.set(holderInfo.holder, holder);  
+        }
+        App.render();
+      } else {
+        console.log(err);
+      }
+    });
+
   }
   
 }

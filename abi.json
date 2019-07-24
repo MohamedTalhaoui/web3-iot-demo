@@ -24,7 +24,12 @@
 	},
 	{
 		"constant": false,
-		"inputs": [],
+		"inputs": [
+			{
+				"name": "_name",
+				"type": "string"
+			}
+		],
 		"name": "subscribe",
 		"outputs": [],
 		"payable": true,
@@ -42,16 +47,21 @@
 		"inputs": [
 			{
 				"indexed": false,
-				"name": "_from",
+				"name": "holder",
 				"type": "address"
 			},
 			{
 				"indexed": false,
-				"name": "_value",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "balance",
 				"type": "uint256"
 			}
 		],
-		"name": "PremiumReceived",
+		"name": "HolderUpdate",
 		"type": "event"
 	},
 	{
@@ -76,10 +86,10 @@
 	{
 		"constant": true,
 		"inputs": [],
-		"name": "pool",
+		"name": "getHoldersCount",
 		"outputs": [
 			{
-				"name": "",
+				"name": "holderCount",
 				"type": "uint256"
 			}
 		],
@@ -95,11 +105,44 @@
 				"type": "uint256"
 			}
 		],
-		"name": "subscribers",
+		"name": "holders",
 		"outputs": [
 			{
 				"name": "",
 				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "name",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "pool",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"payable": false,

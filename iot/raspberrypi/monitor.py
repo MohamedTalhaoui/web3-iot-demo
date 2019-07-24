@@ -11,27 +11,28 @@ from web3.exceptions import TransactionNotFound
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 12
 
-web3 = Web3(HTTPProvider('https://rinkeby.infura.io/v3/' + '91d62b1aafc648358eb9ac3f6d884549'))
-contract_addr = web3.toChecksumAddress('0x23eb8e8c933f4a39838892497d852bf598d4c3f8')
-from_addr = web3.toChecksumAddress('0x44b1451f16ddd490ee0be676c7c85096bb61134d')
 
 with open('./secrets.json') as f:
-    sercrets_json = json.load(f)
-key = sercrets_json["key"]
-print(key)
+    secrets_json = json.load(f)
+
+private_key = secrets_json["private_key"]
+web3 = Web3(HTTPProvider('https://rinkeby.infura.io/v3/' + secrets_json["infura_api_key"]))
+contract_addr = web3.toChecksumAddress(secrets_json["contract_addr"])
+owner_address = web3.toChecksumAddress(secrets_json["owner_address"])
 
 with open("./abi.json") as f:
     abi_json = json.load(f)
 abi = abi_json[0]
+
 contract = web3.eth.contract(address=contract_addr, abi=abi_json)
 
-def sendTransaction(txCount, encodedData):
+def send_transaction(txCount, encodedData):
     transaction = {
         'to': contract_addr,
-        'from': from_addr,
+        'from': owner_address,
         'value': 0x0,
         'gas': web3.toHex(700000),
-        'gasPrice': web3.toHex(web3.toWei('10', 'gwei')),
+        'gasPrice': web3.toHex(web3.toWei('1', 'gwei')),
         'nonce': txCount,
         'data': encodedData
     }
@@ -50,7 +51,7 @@ def payout():
             print("Payout Holder at " + payout_address)
             txCount = web3.eth.getTransactionCount(from_addr)
             print("Nounce " + str(txCount))
-            sendTransaction(txCount, contract.encodeABI(fn_name='payout', args=[i]))
+            send_transaction(txCount, contract.encodeABI(fn_name='payout', args=[i]))
 
 def main():
     while True:

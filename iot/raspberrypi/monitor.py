@@ -6,7 +6,6 @@ import time
 import Adafruit_DHT
 from web3 import Web3, HTTPProvider
 from web3.utils.threads import Timeout
-from web3.exceptions import TransactionNotFound
 
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 12
@@ -18,7 +17,7 @@ with open('./secrets.json') as f:
 private_key = secrets_json["private_key"]
 web3 = Web3(HTTPProvider('https://rinkeby.infura.io/v3/' + secrets_json["infura_api_key"]))
 contract_addr = web3.toChecksumAddress(secrets_json["contract_addr"])
-owner_address = web3.toChecksumAddress(secrets_json["owner_address"])
+owner_address = web3.toChecksumAddress(secrets_json["owner_addr"])
 
 with open("./abi.json") as f:
     abi_json = json.load(f)
@@ -60,7 +59,7 @@ def main():
         if humidity is not None and temperature is not None:
             print("Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity))
         
-            if temperature > 30 or humidity > 90:
+            if temperature > 50 or humidity > 90:
                 print("Triggerring Smart Contract ...")
                 payout()
 
@@ -85,6 +84,7 @@ def wait_for_transaction_receipt(txn_hash, timeout=120, poll_latency=0.1):
     return txn_receipt
 
 if __name__== "__main__":
+  main()
   #count()
   #payout()
 

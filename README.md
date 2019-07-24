@@ -11,8 +11,8 @@ We will avoid the burden of running a full node, so to interact with our smart c
 
 ### Deploy the smart contract
 There are plenty of options to deploy our smart contract, to keep it simple we will use Remix IDE.
-Remix IDE is a web based IDE to develop, compile, deploy, interact and debug your smart contracts. 
-https://remix.ethereum.org
+[Remix IDE](https://remix.ethereum.org) is a web based IDE to develop, compile, deploy, interact and debug your smart contracts. 
+
 Note: Remix IDE works better with Google Chrome
 
 - Copy the contract code in the Remix IDE
@@ -21,7 +21,7 @@ Note: Remix IDE works better with Google Chrome
 - Copy the ABI in iot/raspberrypi/abi.json and dapp/api.json
 - Deploy the contract
 - Save the contract address
-- Browse Rinkeby Etherscan to your newly created contract (https://rinkeby.etherscan.io)
+- Browse [Rinkeby Etherscan](https://rinkeby.etherscan.io) to your newly created contract 
 
 ### Deploy the dapp
 This is a simple web application to interact with the smart contract to subscribe your insurance policy
@@ -31,6 +31,7 @@ The full dapp code is under the dapp folder.
 
 You can choose whatever hosting option you like.
 Mine is hosted on GitHub pages:
+
 https://mohamedtalhaoui.github.io/web3-iot-demo/
 
 If you plan to deploy your own smart contract, then you will have to 
@@ -44,25 +45,31 @@ If you plan to deploy your own smart contract, then you will have to
 - RaspberryPi 3 B+
 
 #### Wiring
-I am using Grove bas Hat for raspberrypi and Grove DHT 22.
+I am using [Grove bas Hat for raspberrypi and Grove DHT 22](http://wiki.seeedstudio.com/Grove-Temperature_and_Humidity_Sensor_Pro/#play-with-raspberry-pi-with-grove-base-hat-for-raspberry-pi)
 That ease the wiring ... a lot.
-http://wiki.seeedstudio.com/Grove-Temperature_and_Humidity_Sensor_Pro/#play-with-raspberry-pi-with-grove-base-hat-for-raspberry-pi
+
 
 If not using Grove, check this link 
+
 https://pimylifeup.com/raspberry-pi-humidity-sensor-dht22/
 
 #### Software
 - Install web3.py
-```bash
-pip3 install Adafruit_DHT
-```
-- Install Adafruit_DHT
+
 ```python
 pip3 install Adafruit_DHT
 ```
+
+- Install Adafruit_DHT
+
+```python
+pip3 install Adafruit_DHT
+```
+
 - Upload iot/raspreberrypi/abi.json 
 - Upload iot/raspreberrypi/abi.json to your raspberry
 - Create a secrets.json file with the following data:
+
 ```json
 {
     "infura_api_key": "<YOUR_INFURA_API_KEY>",

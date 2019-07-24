@@ -1,4 +1,5 @@
 .vscode
-arduino/web3-iot-demo/secrets.h
+iot/raspberrypi/venv
+iot/raspberrypi/secrets.json
 dapp/node_modules
 utils/node_modules

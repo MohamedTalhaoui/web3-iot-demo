@@ -23,15 +23,29 @@
             <p>
                 Premium is <span class="premium"></span> Ether 
             </p>
-            <div class="container">
-                <button class="btn btn-primary btn-lg" onclick="App.subscribe()"> Subscribe</button>
-            </div>
+            <form class="form-inline justify-content-center" role="form" onsubmit="App.subscribe(); return false">
+                <div class="form-group mx-sm-3">
+                    <input id="holderName" class="form-control" placeholder="Name">
+                </div>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>            
             <br>
             <p><span class="pool"></span> ETH Avilable in the pool</p>
             <hr>
             <p id="accountAddress"></p>
-            </div>
-        </div>
+        </div>        
+    </div>
+    <div class="container">
+        <table id="holders" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Address</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>            
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

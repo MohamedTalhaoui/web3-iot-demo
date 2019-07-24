@@ -1,13 +1,13 @@
 {
-    "name": "SimpleInsuranceDapp",
-    "version": "1.0.0",
-    "description": "Simple Insurance Dapp",
-    "scripts": {
-      "dev": "lite-server"
-    },
-    "author": "MTA",
-    "license": "GNU",
-    "devDependencies": {
-      "lite-server": "^2.4.0"
-    }
+  "name": "SimpleInsuranceDapp",
+  "version": "1.0.0",
+  "description": "Simple Insurance Dapp",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "MTA",
+  "license": "GNU",
+  "devDependencies": {
+    "lite-server": "^2.4.0"
+  }
 }

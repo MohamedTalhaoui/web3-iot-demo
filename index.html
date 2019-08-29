@@ -21,6 +21,12 @@
         </div>
         <div id="content" class="text-center" style="display: none;">
             <p>
+                Get instant payout if temperature > 28 C or humidity > 90 %
+            </p>
+            <p>
+                Contract address is <span class="font-weight-bold" id="contractAddress"></span>
+            </p>
+            <p>
                 Premium is <span class="premium"></span> Ether 
             </p>
             <form class="form-inline justify-content-center" role="form" onsubmit="App.subscribe(); return false">
@@ -32,7 +38,9 @@
             <br>
             <p><span class="pool"></span> ETH Avilable in the pool</p>
             <hr>
-            <p id="accountAddress"></p>
+            <p>
+                Account is <span class="font-weight-bold" id="accountAddress"></span> 
+            </p>
         </div>        
     </div>
     <div class="container">

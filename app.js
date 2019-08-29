@@ -1,4 +1,5 @@
 App = {
+  contract_address: '0x23eb8e8c933f4a39838892497d852bf598d4c3f8',
   web3Provider: null,
   SimpleInsurance: null,
   premium : 0.1,
@@ -31,8 +32,7 @@ App = {
   initContracts: function () {
     $.getJSON("abi.json", function (abi) {
       let SimpleInsuranceContract = web3.eth.contract(abi);
-      //App.SimpleInsurance = SimpleInsuranceContract.at('0x7b61ff44894a397589bd4d4f8be8f5cac0363217');
-      App.SimpleInsurance = SimpleInsuranceContract.at('0x23eb8e8c933f4a39838892497d852bf598d4c3f8');
+      App.SimpleInsurance = SimpleInsuranceContract.at(App.contract_address);
              
       App.listenForEvents();
       return App.render();
@@ -52,13 +52,14 @@ App = {
       content.hide();
 
       $('.premium').html(App.premium);
+      $('#contractAddress').html(App.contract_address);
       
       App.account = web3.eth.accounts[0];
-      $('#accountAddress').html("Your account: " + App.account);
+      $('#accountAddress').html(App.account);
       setInterval(function() {
         if (web3.eth.accounts[0] !== App.account) {
           App.account = web3.eth.accounts[0];
-          $('#accountAddress').html("Your account: " + App.account);
+          $('#accountAddress').html(App.account);
         }
       }, 100);
       

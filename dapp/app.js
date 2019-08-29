@@ -52,13 +52,14 @@ App = {
       content.hide();
 
       $('.premium').html(App.premium);
+      $('#contractAddress').html(App.contract_address);
       
       App.account = web3.eth.accounts[0];
-      $('#accountAddress').html("Your account: " + App.account);
+      $('#accountAddress').html(App.account);
       setInterval(function() {
         if (web3.eth.accounts[0] !== App.account) {
           App.account = web3.eth.accounts[0];
-          $('#accountAddress').html("Your account: " + App.account);
+          $('#accountAddress').html(App.account);
         }
       }, 100);
       

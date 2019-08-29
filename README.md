@@ -18,7 +18,7 @@ Note: Remix IDE works better with Google Chrome
 - Copy the contract code in the Remix IDE
 - Make sure 'Compiler' and 'Deploy and Run' plugins are activated
 - Compile the contract
-- Copy the ABI in iot/raspberrypi/abi.json and dapp/api.json
+- Copy the ABI in raspberrypi/abi.json and dapp/api.json
 - Deploy the contract
 - Save the contract address
 - Browse [Rinkeby Etherscan](https://rinkeby.etherscan.io) to your newly created contract 
@@ -46,8 +46,8 @@ If you plan to deploy your own smart contract, then you will have to
 
 #### Wiring
 I am using [Grove bas Hat for raspberrypi and Grove DHT 22](http://wiki.seeedstudio.com/Grove-Temperature_and_Humidity_Sensor_Pro/#play-with-raspberry-pi-with-grove-base-hat-for-raspberry-pi)
-That ease the wiring ... a lot.
 
+That ease the wiring ... a lot.
 
 If not using Grove, check this link 
 
@@ -66,8 +66,8 @@ pip3 install Adafruit_DHT
 pip3 install Adafruit_DHT
 ```
 
-- Upload iot/raspreberrypi/abi.json 
-- Upload iot/raspreberrypi/abi.json to your raspberry
+- Upload raspreberrypi/abi.json 
+- Upload raspreberrypi/abi.json to your raspberry
 - Create a secrets.json file with the following data:
 
 ```json

@@ -1,5 +1,5 @@
 .vscode
-iot/raspberrypi/venv
-iot/raspberrypi/secrets.json
+raspberrypi/venv
+raspberrypi/secrets.json
 dapp/node_modules
 utils/node_modules
